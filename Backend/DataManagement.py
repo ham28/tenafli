@@ -73,7 +73,6 @@ def percentofAfricanAmericanStudents(stateAbr, data, year=datetime.date.today().
         }
 
 
-
 # Sort the Array of the statistics of all scool
 def sort_statistics(table, top=5,column_name='percentofAfricanAmericanStudents'):
     n = len(table)
