@@ -1,4 +1,3 @@
-import os
 import requests
 import datetime
 
@@ -10,8 +9,10 @@ def computeNumberFromPercentage(totalNumber, percentage):
 
 # Compute the Percentage of Number given the totalNumber
 def computePercentageFromNumber(totalNumber, number):
-    return (number / totalNumber) * 100
-
+    try:
+        return (number / totalNumber) * 100
+    except:
+        return 0
 
 # Retrieve Data from API url
 # Params (STR)Abreviation of State, (STR)AppID, (STR)appKey, (INT)number of object perPage
@@ -42,7 +43,7 @@ def percentofAfricanAmericanStudents(stateAbr, data, year=datetime.date.today().
                 for schoolYearlyDetail in schoolYearlyDetails:
 
                     if is_list:
-                        if schoolYearlyDetail['year'] in year:
+                        if schoolYearlyDetail['year'] in year :
                             numberOfStudents = schoolYearlyDetail['numberOfStudents']
                             totalStudent += numberOfStudents
                             numberOfAfricanAmericanStudents = computeNumberFromPercentage(numberOfStudents,
@@ -73,50 +74,13 @@ def percentofAfricanAmericanStudents(stateAbr, data, year=datetime.date.today().
         }
 
 
-# Sort the Array of the statistics of all scool
+# Sort the Array of the statistics of all school
 def sort_statistics(table, top=5,column_name='percentofAfricanAmericanStudents'):
     n = len(table)
     for i in range(n - 1):
         for j in range(0, n - i - 1):
             if table[j][1][1][column_name] > table[j + 1][1][1][column_name]:
                 table[j], table[j + 1] = table[j + 1], table[j]
-    return reversed(table[-top:])
+    table = table[::-1]
+    return table[:top]
 
-
-def main():
-
-    statistics_ = []
-
-    # directory = 'data/'
-    # for filename in os.listdir(directory):
-    #     file_path = os.path.join(directory, filename)
-    #     if os.path.isfile(file_path):
-    #         with open(file_path, 'r') as file:
-    #             content = json.load(file)
-    #         statistics_.append(list(percentofAfricanAmericanStudents(filename[:-5], content, [2023, 2022, 2021, 2020]).items()))
-    #
-    #
-    # sorted = sort_statistics(statistics_)
-    #
-    # for row in sorted:
-    #     print(row)
-
-    state_abr_list = \
-        ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY'
-            , 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND'
-            , 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY', ]
-
-    for state in state_abr_list:
-        data = getData(state)
-        statistics_.append(list(percentofAfricanAmericanStudents(state, data, [2023, 2022, 2021, 2020]).items()))
-
-    sorted_list = sort_statistics(statistics_)
-
-    for row in sorted_list:
-        print(row)
-
-    return
-
-
-if __name__ == '__main__':
-    main()
