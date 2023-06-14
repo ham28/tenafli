@@ -8,10 +8,21 @@ def schoolRank(request):
          'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
          'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
          'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC',
-         'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY', ]
+         'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY', 'DC']
 
     content = []
     statistics_ = []
+
+    keys = request.GET.keys()
+    params = {'year': 2018}
+
+    if len(keys) > 0:
+        if 'top' in keys and request.GET['top']:
+            params['top'] = request.GET['top']
+        if 'column_name' in keys and request.GET['column_name']:
+            params['column_name'] = request.GET['column_name']
+        if 'year' in keys and request.GET['year']:
+            params['year'] = [eval(i) for i in request.GET['year'].split(',')]
 
     for state in state_abr_list:
         content.append([state, getData(state)])
@@ -20,15 +31,7 @@ def schoolRank(request):
         state = data[0]
         schoolList = data[1]
         statistics_.append(
-            list(percentofAfricanAmericanStudents(state, schoolList, [2018]).items()))
-
-    keys = request.GET.keys()
-    params={}
-    if len(keys) > 0:
-        if 'top' in keys:
-            params['top'] = request.GET['top']
-        if 'column_name' in keys:
-            params['column_name'] = request.GET['column_name']
+            list(percentofAfricanAmericanStudents(state, schoolList, params['year']).items()))
 
     sorted_list = sort_statistics(statistics_, params)
 
