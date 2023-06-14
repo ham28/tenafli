@@ -2,10 +2,7 @@ from django.http import JsonResponse
 from .utils import percentofAfricanAmericanStudents, getData, sort_statistics
 
 
-
-# Create your views here.
 def schoolRank(request):
-
     state_abr_list = \
         ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
          'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
@@ -25,6 +22,15 @@ def schoolRank(request):
         statistics_.append(
             list(percentofAfricanAmericanStudents(state, schoolList, [2018]).items()))
 
-    sorted_list = sort_statistics(statistics_)
+    keys = request.GET.keys()
+    params={}
+    if len(keys) > 0:
+        if 'top' in keys:
+            params['top'] = request.GET['top']
+        if 'column_name' in keys:
+            params['column_name'] = request.GET['column_name']
 
-    return JsonResponse(sorted_list, safe=False)
+
+    sorted_list = sort_statistics(statistics_, params)
+
+    return JsonResponse(sorted_list, safe=False, json_dumps_params={'indent': 2})

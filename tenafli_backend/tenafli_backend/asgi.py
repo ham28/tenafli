@@ -1,5 +1,5 @@
 """
-ASGI config for pet_marketplace project.
+ASGI config for tenafli_backend project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pet_marketplace.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tenafli_backend.settings')
 
 application = get_asgi_application()
