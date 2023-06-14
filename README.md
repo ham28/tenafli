@@ -1,28 +1,29 @@
 # tenafli
-code for assessment in Tenafli 
+code for the test at Tenafli
 
-# Created date:
-in june 10
+# Creation date:
+in june 10 2023
 
 # Installation
 
-<p>clonee repository:</p> 
+<p>Clone the repository:</p> 
 
 `git clone https://github.com/ham28/tenafli.git`
 
-<p> go ins the tenafli directory <p>
+<p> Go inside the tenafli directory </p>
 
 `cd tenafli`
 
-open a terminal prompt, inside term prompt execute:
+<p>Open a terminal prompt to create a new Virtual Environment.</p> 
+<p>Inside the terminal prompt execute:</p>
 
 `python3 -m venv env`
 
-then activate this new env
+<p>then activate this new environment</p>
 
 `source env/bin/activate`
 
-Install dependencies:
+<p>Install dependencies:</p>
 `pip install -r requirement.txt`
 
 # Running Project
@@ -32,10 +33,15 @@ Install dependencies:
 
 `python tenafli_backend/mana.py runserver`
 
-Go to the indicated url: http://127.0.0.11:8000
+Go to the indicated URL URL http://127.0.0.1:8000
 
 Or directly through the browser, by going to the URL http://127.0.0.1:8000
 
-# Pams in the browser:
-you can add some params in the browser as below
+# Params in the browser:
 
+<p>you can add some params in the browser as below</p>
+
+http://127.0.0.1:8000/?top=10&column_name=totalofAfricanAmericanStudents
+
+- top: get the top number you want to have (default value = 5 )
+- column_name: can be switch between 'totalStudent', 'totalofAfricanAmericanStudents',percentofAfricanAmericanStudents (default value = 'percentofAfricanAmericanStudents') 
