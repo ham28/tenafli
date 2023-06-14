@@ -30,7 +30,6 @@ def schoolRank(request):
         if 'column_name' in keys:
             params['column_name'] = request.GET['column_name']
 
-
     sorted_list = sort_statistics(statistics_, params)
 
     return JsonResponse(sorted_list, safe=False, json_dumps_params={'indent': 2})
