@@ -27,13 +27,13 @@ in june 10 2023
 `pip install -r requirement.txt`
 
 # Running Project
-`python tenafli_backend/mana.py makemigrations`
+`python tenafli_backend/manage.py makemigrations`
 
-`python tenafli_backend/mana.py migrate`
+`python tenafli_backend/manage.py migrate`
 
-`python tenafli_backend/mana.py runserver`
+`python tenafli_backend/manage.py runserver`
 
-Go to the indicated URL URL http://127.0.0.1:8000
+Go to the indicated URL http://127.0.0.1:8000
 
 Or directly through the browser, by going to the URL http://127.0.0.1:8000
 
