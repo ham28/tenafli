@@ -26,7 +26,11 @@ in june 10 2023
 <p>Install dependencies:</p>
 `pip install -r requirement.txt`
 
-# Running Project
+# For the CLI
+ `python Backend/DataManagement.py`
+
+# For the API 
+### Running Project
 `python tenafli_backend/manage.py makemigrations`
 
 `python tenafli_backend/manage.py migrate`
@@ -37,7 +41,7 @@ Go to the indicated URL http://127.0.0.1:8000
 
 Or directly through the browser, by going to the URL http://127.0.0.1:8000
 
-# Params in the browser:
+### Params in the browser:
 
 <p>you can add some params in the browser as below</p>
 
