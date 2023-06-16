@@ -18,7 +18,6 @@ async def main():
     responses = await getData(state_abr_list)
 
     elapsed = time.perf_counter() - s
-    print(f"{__file__} executed in {elapsed:0.2f} seconds.")
 
     for data in responses:
         state = data[0]
@@ -31,7 +30,6 @@ async def main():
     for row in sorted_list:
         print(row)
 
-    print(f"{__file__} executed in {elapsed:0.2f} seconds.")
 
     return
 
