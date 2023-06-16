@@ -1,3 +1,6 @@
+import asyncio
+
+import aiohttp
 import requests
 import datetime
 
@@ -16,15 +19,20 @@ def computePercentageFromNumber(totalNumber, number):
 
 # Retrieve Data from API url
 # Params (STR)Abreviation of State, (STR)AppID, (STR)appKey, (INT)number of object perPage
-def getData(stateAbr, appID='052d9b7b', appKey='2bb041493517101dba0e91f04aee75b0', perPage=20):
-    url = 'https://api.schooldigger.com/v2.0/schools?st=' + stateAbr + '&perPage=' + str(
-        perPage) + '&appID=' + appID + '&appKey=' + appKey
-    response = requests.get(url)
-    if response.status_code == 200:
-        return response.json()
-    else:
-        return False
+async def getData(stateAbrs, appID='052d9b7b', appKey='2bb041493517101dba0e91f04aee75b0', perPage=20):
+    urls = [[stateAbr, 'https://api.schooldigger.com/v2.0/schools?st=' + stateAbr + '&perPage=' + str(
+        perPage) + '&appID=' + appID + '&appKey=' + appKey] for stateAbr in stateAbrs]
 
+    async with aiohttp.ClientSession() as session:
+        tasks = [asyncFetch(session, url[1], url[0]) for url in urls]
+        responses = await asyncio.gather(*tasks)
+    return responses
+
+
+async def asyncFetch(session, url,stateAbr):
+    async with session.get(url) as response:
+        var = await response.json()
+        return [stateAbr, var]
 
 # Compute the Percentage
 # Params (STR) Abreviation of State, (Json)data associated with the state, (INT, [INT])year can be list of int

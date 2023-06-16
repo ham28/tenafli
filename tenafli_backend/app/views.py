@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from .utils import percentofAfricanAmericanStudents, getData, sort_statistics
 
 
-def schoolRank(request):
+async def schoolRank(request):
     state_abr_list = \
         ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
          'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
@@ -10,7 +10,6 @@ def schoolRank(request):
          'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC',
          'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY', 'DC']
 
-    content = []
     statistics_ = []
 
     keys = request.GET.keys()
@@ -24,8 +23,7 @@ def schoolRank(request):
         if 'year' in keys and request.GET['year']:
             params['year'] = [eval(i) for i in request.GET['year'].split(',')]
 
-    for state in state_abr_list:
-        content.append([state, getData(state)])
+    content = await getData(state_abr_list)
 
     for data in content:
         state = data[0]

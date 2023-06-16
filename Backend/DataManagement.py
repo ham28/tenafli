@@ -1,7 +1,10 @@
+import asyncio
+import time
+
 from Backend.utils import getData, percentofAfricanAmericanStudents, sort_statistics
 
 
-def main():
+async def main():
 
     state_abr_list = \
         ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY'
@@ -10,11 +13,14 @@ def main():
 
     content = []
     statistics_ = []
+    s = time.perf_counter()
 
-    for state in state_abr_list:
-        content.append([state, getData(state)])
+    responses = await getData(state_abr_list)
 
-    for data in content:
+    elapsed = time.perf_counter() - s
+    print(f"{__file__} executed in {elapsed:0.2f} seconds.")
+
+    for data in responses:
         state = data[0]
         schoolList = data[1]
         statistics_.append(
@@ -25,8 +31,11 @@ def main():
     for row in sorted_list:
         print(row)
 
+    print(f"{__file__} executed in {elapsed:0.2f} seconds.")
+
     return
 
 
 if __name__ == '__main__':
-    main()
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(main())
