@@ -45,7 +45,8 @@ Or directly through the browser, by going to the URL http://127.0.0.1:8000
 
 <p>you can add some params in the browser as below</p>
 
-http://127.0.0.1:8000/?top=10&column_name=totalofAfricanAmericanStudents
+http://127.0.0.1:8000/?top=10&column_name=totalofAfricanAmericanStudents&year=2020,2019
 
 - top: get the top number you want to have (default value = 5 )
 - column_name: can be switch between 'totalStudent', 'totalofAfricanAmericanStudents',percentofAfricanAmericanStudents (default value = 'percentofAfricanAmericanStudents') 
+- year: can be a single year(as: 2020), can be list of year(2020,2023,2021). The default value is the current year
