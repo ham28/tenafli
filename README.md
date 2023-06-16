@@ -49,4 +49,4 @@ http://127.0.0.1:8000/?top=10&column_name=totalofAfricanAmericanStudents&year=20
 
 - top: get the top number you want to have (default value = 5 )
 - column_name: can be switch between 'totalStudent', 'totalofAfricanAmericanStudents',percentofAfricanAmericanStudents (default value = 'percentofAfricanAmericanStudents') 
-- year: can be a single year(as: 2020), can be list of year(2020,2023,2021)
+- year: can be a single year(as: 2020), can be list of year(2020,2023,2021). The default value is the current year
